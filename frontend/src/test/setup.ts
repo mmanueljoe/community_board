@@ -1,8 +1,18 @@
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
-import { afterEach } from 'vitest';
+import { afterAll, afterEach, beforeAll, vi } from 'vitest';
+import { server } from './server';
 
-// Runs a cleanup after each test case (e.g. clearing jsdom)
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'error' });
+});
+
 afterEach(() => {
   cleanup();
+  server.resetHandlers();
+  vi.clearAllMocks();
+});
+
+afterAll(() => {
+  server.close();
 });
