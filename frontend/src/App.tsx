@@ -1,8 +1,12 @@
+import { RouterProvider } from 'react-router';
+import { AuthProvider } from '@/context';
+import { router } from '@/router';
+
 function App() {
   return (
-    <div>
-      <h1 className="text-4xl text-red-400">Hello Community Board</h1>
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 
